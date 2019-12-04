@@ -72,39 +72,6 @@ exports.create_user = function(req, res) {
         });
 }
 
-/*exports.create_user = function (req, res){
-    User.findOne({id:req.body.id})
-        .then( data => {
-            if(!data){
-                var new_user = new User(req.body);
-                new_user.save(function(err, user){
-                    if(err){
-                        res.status(400);
-                        return res.send({
-                            status: "400",
-                            message: "Could not create user.",
-                            user: user
-                        });
-                    }
-                    res.status(201);
-                    return res.json({
-                        status: "201",
-                        message: "User created.",
-                        user: user
-                    });
-                });
-            }
-        })
-        .catch(err => {
-            res.status(403);
-            return res.json({
-                status: "403",
-                message: "User id already exist. Could not create user.",
-                user: req.body
-            });
-        });
-}*/
-
 exports.get_user = function (req, res){
     User.findOne({id:req.params.id}, {_id: 0, __v: 0})
         .then(user => {
@@ -156,7 +123,7 @@ exports.update_user = function (req, res){
                  return res.json({
                      status: "200",
                      message: "User with id: " + req.params.id + " updated.",
-                     user: result
+                     user: userToUpdate
                  });
             });
         })
