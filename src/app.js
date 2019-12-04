@@ -1,4 +1,5 @@
 const express = require('express'),
+    router = express.Router(),
     mongoose = require('mongoose'),
     bodyParser = require('body-parser'),
     app = express(),
@@ -10,26 +11,19 @@ const swaggerJsDoc = require('swagger-jsdoc');
 
 const port = process.env.PORT || 5000;
 
-// Extented: https://swagger.io/specification/#infoObject
-const swaggerOptions = {
-    apis: ['.routes/*.js'],
-    basePath: '/',
-    swaggerDefinition: {
-        info: {
-            title: 'Ipssi Api 2019',
-            description: 'Ipssi Api Information',
-            version: '1.0.0',
-            contact: {
-                name: 'Awasome Dev'
-            },
-            servers: ["http:localhost:5000"],
-            swagger: '2.0',
-        },
-    },
-};
+const swaggerSpec = require('./config/swagger.config').spec();  
 
-const swaggerDocs = swaggerJsDoc(swaggerOptions);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+require('./api/routes/userRoutes.js')(app);
+
+const swaggerOptions = {  
+  customSiteTitle: 'Ipssi API 2019 Documentation', 
+  customCss: '.topbar { display: none }',  
+};  
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, swaggerOptions));  
+app.get('/api-docs.json', (req, res) => {  
+    res.setHeader('Content-Type', 'application/json');  
+    res.status(200).json(swaggerSpec);  
+}); 
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/ipssi2019', {useUnifiedTopology: true, useNewUrlParser: true});

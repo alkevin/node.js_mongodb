@@ -1,6 +1,16 @@
 const mongoose = require('mongoose');
 User = mongoose.model('Users');
 
+/**
+ * @swagger
+ * /users:
+ *  get:
+ *    description: Use to return all users
+ *  responses:
+ *    '200':
+ *      description: Successfully fetch all users
+ * 
+ */
 exports.list_all_users = function (req, res){
     User.find({})
         .then( users => {
