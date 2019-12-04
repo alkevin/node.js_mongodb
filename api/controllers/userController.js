@@ -137,7 +137,7 @@ exports.update_user = function (req, res){
 }
 
 exports.findOneUpdate_user = function(req, res){
-    User.findOneAndUpdate({id:req.params.id},req.body, {new: true})
+    User.findOneAndUpdate({id:req.params.id},req.body, {new: true, useFindAndModify: false})
     .then(result => {
         if(!result){
             res.status(400);
