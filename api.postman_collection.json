@@ -32,13 +32,29 @@
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"value": "application/json",
+						"value": "application/x-www-form-urlencoded",
 						"type": "text"
 					}
 				],
 				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"id\" : 9,\n\t\"nom\" : \"jean\",\n\t\"prenom\" : \"tutu\"\n}",
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "15",
+							"type": "text"
+						},
+						{
+							"key": "nom",
+							"value": "toto",
+							"type": "text"
+						},
+						{
+							"key": "prenom",
+							"value": "tutu",
+							"type": "text"
+						}
+					],
 					"options": {
 						"raw": {
 							"language": "json"
@@ -65,7 +81,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/users/7",
+					"raw": "http://localhost:3000/users/8",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -73,7 +89,7 @@
 					"port": "3000",
 					"path": [
 						"users",
-						"7"
+						"8"
 					]
 				}
 			},
