@@ -5,7 +5,7 @@ exports.list_all_users = function (req, res){
     User.find({})
         .then( users => {
             if(!users){
-                res.status(404)
+                res.status(404);
                 return res.json({
                     status: "404",
                     message: "Could not find users.",
@@ -28,44 +28,82 @@ exports.list_all_users = function (req, res){
         });
 }
 
-exports.create_user = function (req, res){
-    User.findOne({id:req.body.id})
+exports.create_user = function(req, res) {
+    var new_user = new User(req.body);
+    User.findOne({id:new_user.id})
         .then( user => {
+            console.log(user);
             if(!user){
+                console.log("not found");
+                new_user.save(function(err, user){
+                    if(err){
+                        res.status(400).send({
+                            status: "400",
+                            message: "Bad Request. Could not create user.",
+                            user: user
+                        });
+                        console.log("Could not create user.");
+                    }
+                    else {
+                        res.status(201).send({
+                            status: "201",
+                            message: "User created.",
+                            user: user
+                        });
+                        console.log("User created.");
+                    }
+                });
+            }
+            else {
+                res.status(403).send({
+                    status: "403",
+                    message: "User id already exist. Could not create user.",
+                    user: req.body
+                });
+                console.log("User id already exist. Could not create user.");
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                status: "500",
+                message: "Something wrong creating users."
+            });
+            console.log("Something wrong creating users.")
+        });
+}
+
+/*exports.create_user = function (req, res){
+    User.findOne({id:req.body.id})
+        .then( data => {
+            if(!data){
                 var new_user = new User(req.body);
                 new_user.save(function(err, user){
                     if(err){
                         res.status(400);
-                        return res.json({
+                        return res.send({
                             status: "400",
                             message: "Could not create user.",
                             user: user
                         });
                     }
-                })
-                res.status(201);
-                return res.json({
-                    status: "201",
-                    message: "User created.",
-                    user: new_user
+                    res.status(201);
+                    return res.json({
+                        status: "201",
+                        message: "User created.",
+                        user: user
+                    });
                 });
             }
+        })
+        .catch(err => {
             res.status(403);
             return res.json({
                 status: "403",
                 message: "User id already exist. Could not create user.",
                 user: req.body
             });
-        })
-        .catch(err => {
-            res.status(500);
-            return res.json({
-                status: "500",
-                message: "Something wrong creating user.",
-                userSent: req.body
-            });
         });
-}
+}*/
 
 exports.get_user = function (req, res){
     User.findOne({id:req.params.id}, {_id: 0, __v: 0})
