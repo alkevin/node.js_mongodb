@@ -1,16 +1,6 @@
 const mongoose = require('mongoose');
-User = mongoose.model('Users');
+User = mongoose.model('User');
 
-/**
- * @swagger
- * /users:
- *  get:
- *    description: Use to return all users
- *  responses:
- *    '200':
- *      description: Successfully fetch all users
- * 
- */
 exports.list_all_users = function (req, res){
     User.find({})
         .then( users => {
@@ -38,15 +28,19 @@ exports.list_all_users = function (req, res){
         });
 }
 
+
 exports.create_user = function(req, res) {
     var new_user = new User(req.body);
-    User.findOne({id:new_user.id})
+    console.log(req.body);
+    User.findOne({mail:new_user.mail})
         .then( user => {
             console.log(user);
             if(!user){
                 console.log("not found");
                 new_user.save(function(err, user){
                     if(err){
+                        console.log(new_user);
+                        console.log(req.body);
                         res.status(400).send({
                             status: "400",
                             message: "Bad Request. Could not create user.",
@@ -67,10 +61,10 @@ exports.create_user = function(req, res) {
             else {
                 res.status(403).send({
                     status: "403",
-                    message: "User id already exist. Could not create user.",
+                    message: "User mail already exist. Could not create user.",
                     user: req.body
                 });
-                console.log("User id already exist. Could not create user.");
+                console.log("User mail already exist. Could not create user.");
             }
         })
         .catch(err => {
