@@ -11,6 +11,9 @@ const swaggerJsDoc = require('swagger-jsdoc');
 
 const port = process.env.PORT || 5000;
 
+app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.json());
+
 const swaggerSpec = require('./config/swagger.config').spec();  
 
 require('./api/routes/userRoutes.js')(app);
@@ -26,10 +29,7 @@ app.get('/api-docs.json', (req, res) => {
 }); 
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/ipssi2019', {useUnifiedTopology: true, useNewUrlParser: true});
-
-app.use(bodyParser.urlencoded({ extended: true}));
-app.use(bodyParser.json());
+mongoose.connect('mongodb://localhost/ipssi2019', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true,});
 
 const routes = require('./api/routes/userRoutes');
 routes(app);
