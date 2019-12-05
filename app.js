@@ -3,20 +3,20 @@ const express = require('express'),
     mongoose = require('mongoose'),
     bodyParser = require('body-parser'),
     app = express(),
-    hostname = '127.0.0.1',
-    User = require('./api/models/userModel');
+    hostname = '0.0.0.0',
+    User = require('./src/api/models/userModel');
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
-const swaggerSpec = require('./config/swagger.config').spec();  
+const swaggerSpec = require('./src/config/swagger.config').spec();  
 
-require('./api/routes/userRoutes.js')(app);
+require('./src/api/routes/userRoutes.js')(app);
 
 const swaggerOptions = {  
   customSiteTitle: 'Ipssi API 2019 Documentation', 
@@ -29,9 +29,9 @@ app.get('/api-docs.json', (req, res) => {
 }); 
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/ipssi2019', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true,});
+mongoose.connect('mongodb://mongo:27017/ipssi2019', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true,});
 
-const routes = require('./api/routes/userRoutes');
+const routes = require('./src/api/routes/userRoutes');
 routes(app);
 
 app.listen(port, () => {
