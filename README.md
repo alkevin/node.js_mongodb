@@ -13,7 +13,8 @@ This projet is an example to make an REST API with node.js express mondodb and s
 
 * start server :
 
-`nodemon app.js`
+`npm start`
+=> will run nodemon app.js
 
 * import collection of request in postman 
 
