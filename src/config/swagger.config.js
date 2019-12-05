@@ -10,10 +10,10 @@ const swaggerOptions = {
               name: 'Kévin Alves'
           },
       },
-      servers: ["http:localhost:5000"],
+      servers: ["http:localhost:8080"],
       swagger: '2.0',
-      host: `localhost:5000`,  
-      basePath: '/api', 
+      host: `localhost:8080`,  
+      basePath: '/src', 
       consumes: ['application/json'], 
       produces: ['application/json'],
       tags: [
