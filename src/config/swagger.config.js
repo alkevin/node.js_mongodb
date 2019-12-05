@@ -26,7 +26,7 @@ const swaggerOptions = {
           'http',  
       ],
   },
-  apis: [,'./**/api/routes/*.js'],
+  apis: [,'./**/config/swagger.route.js'],
 };
   
 module.exports = {  
