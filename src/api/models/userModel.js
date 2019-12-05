@@ -4,11 +4,11 @@ var Schema = mongoose.Schema;
 const Address = require('./addressModel');
 
 let userSchema = new Schema({
-    nom: {
+    firstname: {
         type: String,
         required: [true, "can't be blank"]
     },
-    prenom: {
+    lastname: {
         type: String,
         required: [true, "can't be blank"]
     },
@@ -17,6 +17,10 @@ let userSchema = new Schema({
         required: true,
         trim: true, 
         unique: true
+    },
+    password: {
+        type: String,
+        required: true
     },
     address: {
         type: Schema.Types.ObjectId,
@@ -30,7 +34,7 @@ let userSchema = new Schema({
     role: {
         type: String,
         enum: ['STUDENT', 'SPEAKER', 'ADMIN'],
-        required: true
+        required: false
     }
 });
 
