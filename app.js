@@ -5,6 +5,7 @@ const express = require('express'),
     app = express(),
     hostname = '0.0.0.0',
     User = require('./src/api/models/userModel');
+    Speaker = require('./src/api/models/speakerModel');
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
