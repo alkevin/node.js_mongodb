@@ -126,7 +126,43 @@ exports.get_user = function (req, res){
         });
 }
 
-exports.update_user = function (req, res){
+exports.update_user = function (req, res) {
+    User.findOne({_id:req.params.id})
+        .then(userToUpdate => {
+            if(!userToUpdate){
+                res.status(404);
+                return res.json({
+                    status: "404",
+                    message: "User with id " + req.params.id + " not found.",
+                    userSent: req.body
+                });
+            }
+            else {
+                User.updateOne({_id:userToUpdate._id}, {$set:req.body}, {new: true}, (err, result) => {
+                    if(err){
+                        res.status(400);
+                        return res.json({
+                            status: "400",
+                            message: "Could not update user ID: " + req.params.id,
+                            userSent: req.body,
+                            userToUpdate: userToUpdate
+                        });
+                     }
+                     else {
+                        res.status(200);
+                        return res.json({
+                            status: "200",
+                            message: "User with id: " + req.params.id + " updated.",
+                            user: userToUpdate
+                        });
+                        
+                     }
+                })
+            }
+        })
+}
+
+/*exports.update_user = function (req, res){
     User.findOne({_id:req.params.id}, {__v: 0})
         .then(userToUpdate => {
             if(!userToUpdate){
@@ -147,16 +183,19 @@ exports.update_user = function (req, res){
                         userToUpdate: userToUpdate
                     });
                  }
-                 console.log(result);
+                 else {
+                    
+                    res.status(200);
+                    console.log(result);
+                    
+                    return res.json({
+                        status: "200",
+                        message: "User with id: " + req.params.id + " updated.",
+                        user: userToUpdate
+                    });
+                    
+                 }
             })
-            .then(() => {
-                res.status(200);
-                 return res.json({
-                     status: "200",
-                     message: "User with id: " + req.params.id + " updated.",
-                     user: userToUpdate
-                 });
-            });
         })
         .catch(err => {
             res.status(404);
@@ -165,7 +204,7 @@ exports.update_user = function (req, res){
                 message: "User not found with this ID: " + req.params.id
             });
         });
-}
+}*/
 
 exports.findOneUpdate_user = function(req, res){
     User.findOneAndUpdate({id:req.params.id},req.body, {new: true, useFindAndModify: false})
