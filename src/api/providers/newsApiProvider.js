@@ -35,7 +35,7 @@ exports.getOneTopArticles = function(){
       let topArticles = JSON.parse(body);
       let randomValue = Math.floor(Math.random() * Math.floor(topArticles.totalResults));
       //resolve = succes
-      resolve(topArticles.result[randomValue]);
+      resolve(topArticles.articles[randomValue]);
       } catch (e) {
         console.log(e);
         console.log(error);

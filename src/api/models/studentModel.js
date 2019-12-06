@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-const Lesson = require('./lessonModel');
-
 let studentSchema = new Schema({
     firstname: {
         type: String,
@@ -22,11 +20,6 @@ let studentSchema = new Schema({
         type: Number,
         required: false
     },
-    lessons: [{
-        type: Schema.Types.ObjectId,
-        ref: Lesson,
-        required: false
-    }]
 });
 
 module.exports = mongoose.model('Student', studentSchema);
