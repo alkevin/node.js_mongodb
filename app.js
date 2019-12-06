@@ -5,6 +5,7 @@ const express = require('express'),
     app = express(),
     hostname = '0.0.0.0',
     User = require('./src/api/models/userModel');
+    Lesson = require('./src/api/models/lessonModel');
     Speaker = require('./src/api/models/speakerModel');
     Student = require('./src/api/models/studentModel');
 
@@ -19,6 +20,7 @@ app.use(bodyParser.json());
 const swaggerSpec = require('./src/config/swagger.config').spec();  
 
 require('./src/api/routes/userRoutes.js')(app);
+require('./src/api/routes/lessonRoutes.js')(app);
 require('./src/api/routes/speakerRoutes.js')(app);
 require('./src/api/routes/studentRoutes.js')(app);
 
