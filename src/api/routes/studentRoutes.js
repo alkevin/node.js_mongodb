@@ -9,4 +9,10 @@ module.exports = function(app){
 
     app.route('/students')
     .get(student.list_all_students)
+    .post(student.create_student)
+
+
+
+    app.route('/students/:id')
+    .get(student.get_student)
 }
