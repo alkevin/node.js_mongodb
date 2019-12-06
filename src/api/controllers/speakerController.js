@@ -92,11 +92,12 @@ exports.get_speaker = function (req, res){
             }
             res.status(200);
             promiseApi.then(response => {
-                speaker.news = response;
+                speaker["news"] = response;
+                console.log(response);
                 return res.json({
                     status: "200",
                     message: "Speaker Fetched successfully.",
-                    speaker: speaker
+                    speaker: [speaker, response]
                 });
               }, error => {
                 console.log(error);
@@ -151,7 +152,7 @@ exports.update_speaker = function (req, res){
 }
 
 exports.findOneUpdate_speaker = function(req, res){
-    Speaker.findOneAndUpdate({id:req.params._id},req.body, {new: true, useFindAndModify: false})
+    Speaker.findOneAndUpdate({id:req.params.id},req.body, {new: true, useFindAndModify: false})
     .then(result => {
         if(!result){
             res.status(400);
@@ -178,7 +179,7 @@ exports.findOneUpdate_speaker = function(req, res){
 }
 
 exports.delete_speaker = function(req, res){
-    Speaker.findOne({_id:req.params.id}, {_id: 0})
+    Speaker.findOne({id:req.params.id}, {_id: 0})
         .then(speaker => {
             if(!speaker){
                 res.status(404);
@@ -187,7 +188,7 @@ exports.delete_speaker = function(req, res){
                     message: "Speaker with id " + req.params.id + " not found."
                 });
             }
-            Speaker.deleteOne({_id:req.params.id}, function(err, result){
+            Speaker.deleteOne({id:req.params.id}, function(err, result){
                 if(err){
                     res.status(400);
                     return res.json({
@@ -211,36 +212,4 @@ exports.delete_speaker = function(req, res){
             });
         });
 
-}
-
-exports.delete_all_speakers = function (req, res){
-    Speaker.find({})
-        .then( speakers => {
-            if(!speakers){
-                res.status(404);
-                return res.json({
-                    status: "404",
-                    message: "Could not find speakers.",
-                    speakers: speakers
-                });
-            }
-            else {
-                speakers.forEach(speaker => {
-                    Speaker.deleteOne({mail:speaker.mail});
-                });
-                res.status(200);
-                return res.json({
-                    status: "200",
-                    message: "All speakers deleted successfully.",
-                    speakers
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500);
-            return res.json({
-                status: "500",
-                message: "Something wrong fetched speakers."
-            });
-        });
 }

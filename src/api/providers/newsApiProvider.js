@@ -30,11 +30,12 @@ exports.getAllTopArticles = function(){
 // r
 exports.getOneTopArticles = function(){
   return new Promise((resolve, reject) => {
-    request({url:baseUrl,qs:query}, (error, response, body) => {
+    request({url:baseUrl,qs:query,pageSize:100}, (error, response, body) => {
       try {
       let topArticles = JSON.parse(body);
-      let randomValue = Math.floor(Math.random() * Math.floor(topArticles.totalResults));
-      //resolve = succes
+      
+      let randomValue = Math.floor(Math.random() * 100);
+//console.log(randomValue);
       resolve(topArticles.articles[randomValue]);
       } catch (e) {
         console.log(e);
