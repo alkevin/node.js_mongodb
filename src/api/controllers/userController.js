@@ -127,6 +127,18 @@ exports.get_user = function (req, res){
 }
 
 exports.update_user = function (req, res){
+    /*var new_firstname = req.body.firstname;
+    var new_firstname = req.body.firstname;
+    var new_firstname = req.body.firstname;
+    var new_firstname = req.body.firstname;
+    var new_firstname = req.body.firstname;
+    var new_firstname = req.body.firstname;
+    var new_firstname = req.body.firstname;
+
+    users.forEach(user => {
+        User.deleteOne({mail:user.mail});
+    });*/
+    var new_user = new User(JSON.parse(JSON.stringify(req.body)));
     User.findOne({_id:req.params.id}, {__v: 0})
         .then(userToUpdate => {
             if(!userToUpdate){
@@ -137,7 +149,10 @@ exports.update_user = function (req, res){
                     userSent: JSON.parse(req.body)
                 });
             }
-            User.updateOne({_id:req.params._id}, {$set: req.body}, (err, result) => {
+            
+            console.log(new_user);
+            
+            User.updateOne({_id:req.params.id}, new_value, (err, result) => {
                 if(err){
                     res.status(400);
                     return res.json({
@@ -147,16 +162,22 @@ exports.update_user = function (req, res){
                         userToUpdate: userToUpdate
                     });
                  }
-                 console.log(result);
+                 else {
+                    
+                    res.status(200);
+                    console.log(result);
+                    
+                    return res.json({
+                        status: "200",
+                        message: "User with id: " + req.params.id + " updated.",
+                        user: userToUpdate
+                    });
+                    
+                 }
             })
-            .then(() => {
-                res.status(200);
-                 return res.json({
-                     status: "200",
-                     message: "User with id: " + req.params.id + " updated.",
-                     user: userToUpdate
-                 });
-            });
+            // .then(() => {
+                
+            // });
         })
         .catch(err => {
             res.status(404);
