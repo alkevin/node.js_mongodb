@@ -1,6 +1,5 @@
 module.exports = function(app){
     const user = require('../controllers/userController');
-    const speaker = require('../controllers/speakerController');
     const signin = require('../controllers/loginController');
     const auth = require('../middleware/auth');
     const express = require('express');
@@ -20,10 +19,6 @@ module.exports = function(app){
         // View logged in user profile
         res.send(req.user)
     })
-
-    app.route('/users/test/:id')
-    .put(user.findOneUpdate_user);
-    
     
     app.route('/users/:id')
     .get(user.get_user)
