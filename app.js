@@ -40,6 +40,7 @@ mongoose.connect('mongodb://mongo:27017/ipssi2019', {useUnifiedTopology: true, u
 const routes = require('./src/api/routes/userRoutes', './src/api/routes/speakerRoutes', './src/api/routes/studentRoutes')
 routes(app);
 
+
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });
