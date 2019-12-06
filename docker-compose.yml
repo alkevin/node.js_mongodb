@@ -1,0 +1,22 @@
+version: "3"
+services:
+  mongo:
+    container_name: mon
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - projet-api
+  nodejs:
+    build: .
+    ports:
+      - "3000:8080"
+    links:
+      - mongo
+    networks:
+      - projet-api
+    volumes:
+      - ./src:/usr/src/app/src
+networks:
+  projet-api:
+    driver: bridge
