@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-const Speaker = require('./speakerModel')
-
 let lessonSchema = new Schema({
     name: {
         type: String,
@@ -19,11 +17,6 @@ let lessonSchema = new Schema({
     enddate: {
         type: Date,
         required: [true, "can't be blank"]
-    },
-    speaker: {
-        type: Schema.Types.ObjectId,
-        ref: Speaker,
-        required: false
     }
 });
 

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 Speaker = mongoose.model('Speaker');
 
+
 exports.list_all_speakers = function (req, res){
     Speaker.find({})
         .then( speakers => {
@@ -31,6 +32,7 @@ exports.list_all_speakers = function (req, res){
 
 exports.create_speaker = function(req, res) {
     var new_speaker = new Speaker(req.body);
+
     console.log(req.body);
     Speaker.findOne({mail:new_speaker.mail})
         .then( speaker => {
@@ -200,4 +202,5 @@ exports.delete_speaker = function(req, res){
                 message: "Something wrong retrieving speaker with ID: " + req.params.id
             });
         });
+
 }
