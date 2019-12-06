@@ -24,10 +24,7 @@ module.exports = function(app){
     .get(user.get_user)
     .put(user.update_user)
     .delete(user.delete_user);
-<<<<<<< HEAD
 
 
     
-=======
->>>>>>> 53a244f2365f61180c790e6256bfbe9cd760f5ab
 }
