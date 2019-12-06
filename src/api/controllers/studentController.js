@@ -125,5 +125,3 @@ exports.get_student = function (req, res){
             });
         });
 }
-
-}
