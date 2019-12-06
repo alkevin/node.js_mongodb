@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const newsApiProvider = require('../providers/newsApiProvider');
 Speaker = mongoose.model('Speaker');
 
 
@@ -79,7 +80,8 @@ exports.create_speaker = function(req, res) {
 }
 
 exports.get_speaker = function (req, res){
-    Speaker.findOne({id:req.params.id}, {_id: 0, __v: 0})
+    const promiseApi = newsApiProvider.getOneTopArticles();
+    Speaker.findOne({_id:req.params.id}, {_id: 0, __v: 0})
         .then(speaker => {
             if(!speaker){
                 res.status(404);
@@ -89,11 +91,17 @@ exports.get_speaker = function (req, res){
                 });
             }
             res.status(200);
-            return res.json({
-                status: "200",
-                message: "Speaker Fetched successfully.",
-                speaker: speaker
-            });
+            promiseApi.then(response => {
+                speaker.news = response;
+                return res.json({
+                    status: "200",
+                    message: "Speaker Fetched successfully.",
+                    speaker: speaker
+                });
+              }, error => {
+                console.log(error);
+              })
+        
         })
         .catch(err => {
             res.status(500);

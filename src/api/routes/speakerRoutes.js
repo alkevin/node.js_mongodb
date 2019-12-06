@@ -7,4 +7,6 @@ module.exports = function(app){
     .get(speaker.list_all_speakers)
     .post(speaker.create_speaker);
     
+    app.route('/speakers/:id')
+    .get(speaker.get_speaker);
 }

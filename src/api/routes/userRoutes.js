@@ -31,8 +31,5 @@ module.exports = function(app){
     .delete(user.delete_user);
 
 
-    app.route('/speakers')
-    .get(speaker.list_all_speakers)
-    .post(speaker.create_speaker);
     
 }

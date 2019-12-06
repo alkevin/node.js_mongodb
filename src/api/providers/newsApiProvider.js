@@ -10,7 +10,7 @@ const query = {
 } 
 
 // Retrun function is a json 
-exports.getTopArticles = function(){
+exports.getAllTopArticles = function(){
   return new Promise((resolve, reject) => {
     request({url:baseUrl,qs:query}, (error, response, body) => {
       try {
@@ -18,6 +18,24 @@ exports.getTopArticles = function(){
       //resolve = succes
       resolve(topArticles);
 
+      } catch (e) {
+        console.log(e);
+        console.log(error);
+        reject(false);
+      }
+    })
+  });
+}
+
+// r
+exports.getOneTopArticles = function(){
+  return new Promise((resolve, reject) => {
+    request({url:baseUrl,qs:query}, (error, response, body) => {
+      try {
+      let topArticles = JSON.parse(body);
+      let randomValue = Math.floor(Math.random() * Math.floor(topArticles.totalResults));
+      //resolve = succes
+      resolve(topArticles.result[randomValue]);
       } catch (e) {
         console.log(e);
         console.log(error);
