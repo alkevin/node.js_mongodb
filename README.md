@@ -37,16 +37,16 @@ http://localhost:5000/api-docs
 ROUTES : 
 
 /students   Lister les etudiants
-/students/:id   GET/  un etudiant
+/students/:id   GET/POST  un etudiant
 
 /speakers  Lister les professeurs
-/speakers/:id  GET/DELETE/PUT  les professeurs
+/speakers/:id  GET/DELETE/POST/PUT  les professeurs
 
 /lessons  Lister les leçons
-/lessons/:id  GET/DELETE/PUT  les professeurs
+/lessons/:id  GET/DELETE/POST/PUT  les professeurs
 
 /users  Lister les utilisateurs
-/users/:id  GET/DELETE/PUT  les utilisateurs
+/users/:id  GET/DELETE/POST/PUT  les utilisateurs
 
 good coding :wink:
 
