@@ -24,10 +24,26 @@ This projet is an example to make an REST API with node.js express mondodb and s
 
 * swagger url : :ok_hand:
 
-`http://localhost:5000/api-docs`
+http://localhost:5000/api-docs   
 
 
 -----------------
+
+ROUTES : 
+
+/students   Lister les etudiants
+/students/:id   GET/DELETE/PUT  les etudiants
+
+/speakers  Lister les professeurs
+/speakers/:id  GET/DELETE/PUT  les professeurs
+
+
+/speakers  Lister les less
+/speakers/:id  GET/DELETE/PUT  les professeurs
+
+
+
+
 
 good coding :wink:
 
