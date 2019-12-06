@@ -28,3 +28,43 @@ exports.list_all_lessons = function(res, req){
             })
         })
 }
+
+exports.create_lesson = function(res, req){
+    var new_lesson = new Lesson(req.body);
+    console.log(req.body);
+    Lesson.findOne({})
+        .then( lesson => {
+            console.log(lesson);
+            if(!lesson){
+                new_lesson.save(function(err, lesson){
+                    if(err){
+                        res.status(400).send({
+                            status: '400',
+                            message: 'Bad Request. Could not create a lesson !',
+                            lesson: lesson
+                        })
+                    }
+                    else {
+                        res.status(201).send({
+                            status: '201',
+                            message: 'Lesson created !',
+                            lesson: lesson
+                        })
+                    }
+                });
+            }
+            else {
+                res.status(403).send({
+                    status: '403',
+                    message: 'Lesson already exist ! ',
+                    lesson: req.body
+                })
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                status: '500',
+                message: 'Something wrong created lesson.'
+            })
+        })
+}
