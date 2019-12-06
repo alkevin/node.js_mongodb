@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-const Lesson = requite('./lessonModel');
+const Lesson = require('./lessonModel');
 
 let speakerSchema = new Schema({
     firstname: {
@@ -22,11 +22,6 @@ let speakerSchema = new Schema({
         type: Number,
         required: false
     },
-    lessons: [{
-        type: Schema.Types.ObjectId,
-        ref: Lesson,
-        required: false
-    }]
 });
 
 module.exports = mongoose.model('Speaker', speakerSchema);

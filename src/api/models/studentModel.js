@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-const Lesson = requite('./lessonModel');
+const Lesson = require('./lessonModel');
 
 let studentSchema = new Schema({
     firstname: {
