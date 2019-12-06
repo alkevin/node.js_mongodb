@@ -19,8 +19,6 @@ exports.getAllTopArticles = function(){
       resolve(topArticles);
 
       } catch (e) {
-        console.log(e);
-        console.log(error);
         reject(false);
       }
     })
@@ -38,8 +36,6 @@ exports.getOneTopArticles = function(){
 //console.log(randomValue);
       resolve(topArticles.articles[randomValue]);
       } catch (e) {
-        console.log(e);
-        console.log(error);
         reject(false);
       }
     })

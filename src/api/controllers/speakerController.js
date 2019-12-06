@@ -33,23 +33,16 @@ exports.list_all_speakers = function (req, res){
 
 exports.create_speaker = function(req, res) {
     var new_speaker = new Speaker(req.body);
-
-    console.log(req.body);
     Speaker.findOne({mail:new_speaker.mail})
         .then( speaker => {
-            console.log(speaker);
             if(!speaker){
-                console.log("not found");
                 new_speaker.save(function(err, speaker){
                     if(err){
-                        console.log(new_speaker);
-                        console.log(req.body);
                         res.status(400).send({
                             status: "400",
                             message: "Bad Request. Could not create speaker.",
                             speaker: speaker
                         });
-                        console.log("Could not create speaker.");
                     }
                     else {
                         res.status(201).send({
@@ -57,7 +50,6 @@ exports.create_speaker = function(req, res) {
                             message: "Speaker created.",
                             speaker: speaker
                         });
-                        console.log("Speaker created.");
                     }
                 });
             }
@@ -67,7 +59,6 @@ exports.create_speaker = function(req, res) {
                     message: "Speaker mail already exist. Could not create speaker.",
                     speaker: req.body
                 });
-                console.log("Speaker mail already exist. Could not create speaker.");
             }
         })
         .catch(err => {
@@ -75,7 +66,6 @@ exports.create_speaker = function(req, res) {
                 status: "500",
                 message: "Something wrong creating speakers."
             });
-            console.log("Something wrong creating speakers.")
         });
 }
 
@@ -93,14 +83,12 @@ exports.get_speaker = function (req, res){
             res.status(200);
             promiseApi.then(response => {
                 speaker["news"] = response;
-                console.log(response);
                 return res.json({
                     status: "200",
                     message: "Speaker Fetched successfully.",
                     speaker: [speaker, response]
                 });
               }, error => {
-                console.log(error);
               })
         
         })

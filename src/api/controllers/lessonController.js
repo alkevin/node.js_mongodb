@@ -31,10 +31,8 @@ exports.list_all_lessons = function(req, res){
 
 exports.create_lesson = function(req, res){
     var new_lesson = new Lesson(req.body);
-    console.log(req.body);
     Lesson.findOne({id:new_lesson.id})
         .then( lesson => {
-            console.log(lesson);
             if(!lesson){
                 new_lesson.save(function(err, lesson){
                     if(err){

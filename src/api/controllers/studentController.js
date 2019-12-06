@@ -31,13 +31,10 @@ exports.list_all_students = function (req, res){
 
 exports.create_student = async(req, res) => {
     var new_student = new Student(req.body);
-    console.log(req.body);
     Student.findOne({mail:new_student.mail})
         .then( student => {
-            console.log(student);
             if(!student){
                 try {
-                    console.log("not found");
                     new_student.save()
                     const token = new_student.generateAuthToken()
                     Student.findOne({mail:new_student.mail})
@@ -48,7 +45,6 @@ exports.create_student = async(req, res) => {
                                 new_student,
                                 token
                             });
-                            console.log("Student created.");
                         })
                 }
                 catch (err) {
@@ -57,30 +53,7 @@ exports.create_student = async(req, res) => {
                         message: "Bad Request. Could not create student.",
                         student: student
                     });
-                    console.log("Could not create student.");
                 }
-
-                /*new_student.save((err, student) => {
-                    if(err){
-                        console.log(new_student);
-                        console.log(req.body);
-                        res.status(400).send({
-                            status: "400",
-                            message: "Bad Request. Could not create student.",
-                            student: student
-                        });
-                        console.log("Could not create student.");
-                    }
-                    else {
-                        res.status(201).send({
-                            status: "201",
-                            message: "Student created.",
-                            student: student
-                        });
-                        console.log("Student created.");
-                    }
-                }
-                );*/
             }
             else {
                 res.status(403).send({
@@ -88,7 +61,6 @@ exports.create_student = async(req, res) => {
                     message: "Student mail already exist. Could not create student.",
                     student: req.body
                 });
-                console.log("Student mail already exist. Could not create student.");
             }
         })
         .catch(err => {
@@ -96,7 +68,6 @@ exports.create_student = async(req, res) => {
                 status: "500",
                 message: "Something wrong creating students."
             });
-            console.log("Something wrong creating students.")
         });
 }
 

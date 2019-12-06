@@ -31,13 +31,10 @@ exports.list_all_users = function (req, res){
 
 exports.create_user = async(req, res) => {
     var new_user = new User(req.body);
-    console.log(req.body);
     User.findOne({mail:new_user.mail})
         .then( user => {
-            console.log(user);
             if(!user){
                 try {
-                    console.log("not found");
                     new_user.save()
                     const token = new_user.generateAuthToken()
                     User.findOne({mail:new_user.mail})
@@ -48,7 +45,6 @@ exports.create_user = async(req, res) => {
                                 new_user,
                                 token
                             });
-                            console.log("User created.");
                         })
                 }
                 catch (err) {
@@ -57,30 +53,7 @@ exports.create_user = async(req, res) => {
                         message: "Bad Request. Could not create user.",
                         user: user
                     });
-                    console.log("Could not create user.");
                 }
-                
-                /*new_user.save((err, user) => {
-                    if(err){
-                        console.log(new_user);
-                        console.log(req.body);
-                        res.status(400).send({
-                            status: "400",
-                            message: "Bad Request. Could not create user.",
-                            user: user
-                        });
-                        console.log("Could not create user.");
-                    }
-                    else {
-                        res.status(201).send({
-                            status: "201",
-                            message: "User created.",
-                            user: user
-                        });
-                        console.log("User created.");
-                    }
-                }
-                );*/
             }
             else {
                 res.status(403).send({
@@ -88,7 +61,6 @@ exports.create_user = async(req, res) => {
                     message: "User mail already exist. Could not create user.",
                     user: req.body
                 });
-                console.log("User mail already exist. Could not create user.");
             }
         })
         .catch(err => {
@@ -96,7 +68,6 @@ exports.create_user = async(req, res) => {
                 status: "500",
                 message: "Something wrong creating users."
             });
-            console.log("Something wrong creating users.")
         });
 }
 
