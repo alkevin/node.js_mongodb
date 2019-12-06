@@ -20,6 +20,7 @@ const swaggerSpec = require('./src/config/swagger.config').spec();
 
 require('./src/api/routes/userRoutes.js')(app);
 require('./src/api/routes/speakerRoutes.js')(app);
+require('./src/api/routes/studentRoutes.js')(app);
 
 const swaggerOptions = {  
   customSiteTitle: 'Ipssi API 2019 Documentation', 
