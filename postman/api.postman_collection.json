@@ -14,12 +14,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/users",
+							"raw": "http://localhost:8080/users",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5000",
+							"port": "8080",
 							"path": [
 								"users"
 							]
@@ -49,12 +49,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/users",
+							"raw": "http://localhost:8080/users",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5000",
+							"port": "8080",
 							"path": [
 								"users"
 							]
@@ -68,15 +68,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/users/5de9d29c6ab6c73170949666",
+							"raw": "http://localhost:8080/users/5dea5952b3561e166c5fa8f3",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5000",
+							"port": "8080",
 							"path": [
 								"users",
-								"5de9d29c6ab6c73170949666"
+								"5dea5952b3561e166c5fa8f3"
 							]
 						}
 					},
@@ -90,13 +90,13 @@
 							{
 								"key": "Content-Type",
 								"name": "Content-Type",
-								"value": "application/x-www-form-urlencoded",
+								"value": "application/json",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"firstname\": \"Kévin\",\n\t\"lastname\": \"Alves\",\n\t\"mail\": \"kevin.test@test.com\",\n\t\"password\": \"lol\",\n\t\"address\": {\n\t\t\t\"numero\": \"23\",\n\t\t\t\"street\": \"boulevard brune\",\n\t\t\t\"city\": \"Paris\",\n\t\t\t\"postalcode\": \"75014\",\n\t\t\t\"country\": \"France\"\n\t\t},\n\t\"age\": \"23\",\n\t\"role\": \"ADMIN\"\n}",
+							"raw": "{\n\t\"firstname\": \"Kjlkjlévin\",\n\t\"password\": \"toto\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -104,15 +104,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/users/5de9b649f932f4262852b61e",
+							"raw": "http://localhost:8080/users/5dea5bb7504e164df0feb7ff",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5000",
+							"port": "8080",
 							"path": [
 								"users",
-								"5de9b649f932f4262852b61e"
+								"5dea5bb7504e164df0feb7ff"
 							]
 						}
 					},
@@ -124,15 +124,15 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/users/5de9d74dd12e0e420c1d3c70",
+							"raw": "http://localhost:8080/users/5dea5952b3561e166c5fa8f3",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5000",
+							"port": "8080",
 							"path": [
 								"users",
-								"5de9d74dd12e0e420c1d3c70"
+								"5dea5952b3561e166c5fa8f3"
 							]
 						}
 					},
@@ -253,7 +253,347 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "http://localhost:8080/speakers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"speakers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post speaker",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstname\": \"Jean\",\n\t\"lastname\": \"Reno\",\n\t\"mail\": \"jean.reno@mail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/speakers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"speakers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete speaker",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/speakers/5dea5d8245ddbc4e640a19ca",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"speakers",
+								"5dea5d8245ddbc4e640a19ca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get speaker by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/speakers/5dea65d1656c812bd0483cde",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"speakers",
+								"5dea65d1656c812bd0483cde"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete all speakers",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/speakers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"speakers"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "student",
+			"item": [
+				{
+					"name": "get all student",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/students",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post student",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstname\": \"Hiren\",\n\t\"lastname\": \"Patel\",\n\t\"mail\": \"hiren.patel@test.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/students",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete student",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/students/5dea67c24d19040c7cb60af1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"students",
+								"5dea67c24d19040c7cb60af1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/students/5dea67c24d19040c7cb60af1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"students",
+								"5dea67c24d19040c7cb60af1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete all students",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/students",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"students"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "lesson",
+			"item": [
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/lessons",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lessons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"API\",\n\t\"description\": \"Cours d'Api\",\n\t\"startdate\": \"2019-02-12T16:00:00.000Z\",\n\t\"enddate\": \"2019-06-12T16:00:00.000Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/lessons",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lessons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/lessons/5dea6d171ddb38448cf2674d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lessons",
+								"5dea6d171ddb38448cf2674d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete lesson",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/lessons/5dea6d171ddb38448cf2674d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lessons",
+								"5dea6d171ddb38448cf2674d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete all lessons",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/lessons",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"lessons"
+							]
 						}
 					},
 					"response": []

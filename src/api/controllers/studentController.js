@@ -125,3 +125,70 @@ exports.get_student = function (req, res){
             });
         });
 }
+
+exports.delete_student = function(req, res){
+    Student.findOne({_id:req.params.id})
+        .then(student => {
+            if(!student){
+                res.status(404);
+                return res.json({
+                    status: "404",
+                    message: "User with id " + req.params.id + " not found."
+                });
+            }
+            User.deleteOne({_id:req.params.id}, (err, result) => {
+                if(err){
+                    res.status(400);
+                    return res.json({
+                        status: "400",
+                        message: "Could not delete user ID: " + req.params.id
+                    });
+                 }
+                 res.status(200);
+                 return res.json({
+                     status: "200",
+                     message: "User with id : " + req.params.id + " deleted",
+                     result: result
+                 });
+            });
+        })
+        .catch(err => {
+            res.status(500);
+            return res.json({
+                status: "500",
+                message: "Something wrong retrieving student with ID: " + req.params.id
+            });
+        });
+}
+
+exports.delete_all_students = function (req, res){
+    Student.find({})
+        .then( students => {
+            if(!students){
+                res.status(404);
+                return res.json({
+                    status: "404",
+                    message: "Could not find users.",
+                    users: students
+                });
+            }
+            else {
+                students.forEach(student => {
+                    Student.deleteOne({mail:student.mail});
+                });
+                res.status(200);
+                return res.json({
+                status: "200",
+                message: "All users deleted successfully.",
+                students
+            });
+            }
+        })
+        .catch(err => {
+            res.status(500);
+            return res.json({
+                status: "500",
+                message: "Something wrong fetched users."
+            });
+        });
+}

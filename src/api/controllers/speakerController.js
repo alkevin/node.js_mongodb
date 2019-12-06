@@ -79,7 +79,7 @@ exports.create_speaker = function(req, res) {
 }
 
 exports.get_speaker = function (req, res){
-    Speaker.findOne({id:req.params.id}, {_id: 0, __v: 0})
+    Speaker.findOne({_id:req.params.id}, {_id: 0, __v: 0})
         .then(speaker => {
             if(!speaker){
                 res.status(404);

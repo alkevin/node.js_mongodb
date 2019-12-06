@@ -5,7 +5,8 @@ module.exports = function(app){
 
     app.route('/speakers')
     .get(speaker.list_all_speakers)
-    .post(speaker.create_speaker);
+    .post(speaker.create_speaker)
+    .delete(speaker.delete_all_speakers);
 
     app.route('/speakers/:id')
     .get(speaker.get_speaker)

@@ -10,7 +10,9 @@ module.exports = function(app){
     app.route('/students')
     .get(student.list_all_students)
     .post(student.create_student)
+    .delete(student.delete_all_students);
 
     app.route('/students/:id')
     .get(student.get_student)
+    .delete(student.delete_student);
 }

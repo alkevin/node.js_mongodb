@@ -4,11 +4,8 @@ module.exports = function(app){
     // Routes
     app.route('/lessons')
     .get(lesson.list_all_lessons)
-    .post(lesson.create_lesson);
-
-    // app.route('/lessons/test/:id')
-    // .put(lesson.findOneUpdate_lesson);
-    
+    .post(lesson.create_lesson)
+    .delete(lesson.delete_all_lessons);
     
     app.route('/lessons/:id')
     .get(lesson.get_lesson)

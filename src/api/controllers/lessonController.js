@@ -70,7 +70,7 @@ exports.create_lesson = function(req, res){
 }
 
 exports.get_lesson = function (req, res){
-    Lesson.findOne({id:req.params.id}, {_id: 0, __v: 0})
+    Lesson.findOne({_id:req.params.id})
         .then(lesson => {
             if(!lesson){
                 res.status(404);
@@ -128,7 +128,7 @@ exports.update_lesson = function (req, res){
 }
 
 exports.delete_lesson = function(req, res){
-    Lesson.findOne({_id:req.params.id}, {_id: 0})
+    Lesson.findOne({_id:req.params.id})
         .then(lesson => {
             if(!lesson){
                 res.status(404);
@@ -158,6 +158,38 @@ exports.delete_lesson = function(req, res){
             return res.json({
                 status: "500",
                 message: "Something wrong retrieving lesson with ID: " + req.params.id
+            });
+        });
+}
+
+exports.delete_all_lessons = function (req, res){
+    Lesson.find({})
+        .then( lessons => {
+            if(!lessons){
+                res.status(404);
+                return res.json({
+                    status: "404",
+                    message: "Could not find speakers.",
+                    lessons: lessons
+                });
+            }
+            else {
+                lessons.forEach(lesson => {
+                    Lesson.deleteOne({mail:lesson.mail});
+                });
+                res.status(200);
+                return res.json({
+                    status: "200",
+                    message: "All speakers deleted successfully.",
+                    lessons
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500);
+            return res.json({
+                status: "500",
+                message: "Something wrong fetched speakers."
             });
         });
 }

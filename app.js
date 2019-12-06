@@ -35,7 +35,7 @@ app.get('/api-docs.json', (req, res) => {
 }); 
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://mongo:27017/ipssi2019', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true,});
+mongoose.connect('mongodb://localhost:27017/ipssi2019', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true,});
 
 const routes = require('./src/api/routes/userRoutes', './src/api/routes/speakerRoutes', './src/api/routes/studentRoutes')
 routes(app);
