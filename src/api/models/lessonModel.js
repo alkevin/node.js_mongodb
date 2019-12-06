@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+// const Speaker = require('./speakerModel');
+
 let lessonSchema = new Schema({
     name: {
         type: String,
