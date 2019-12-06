@@ -23,12 +23,7 @@ let lessonSchema = new Schema({
     enddate: {
         type: Date,
         required: [true, "can't be blank"]
-    },
-    // speaker: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: Speaker,
-    //     required: false
-    // }
+    }
 });
 
 module.exports = mongoose.model('Lesson', lessonSchema);
