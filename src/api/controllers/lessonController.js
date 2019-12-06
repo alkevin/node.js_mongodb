@@ -32,7 +32,7 @@ exports.list_all_lessons = function(req, res){
 exports.create_lesson = function(req, res){
     var new_lesson = new Lesson(req.body);
     console.log(req.body);
-    Lesson.findOne({})
+    Lesson.findOne({id:new_lesson.id})
         .then( lesson => {
             console.log(lesson);
             if(!lesson){
@@ -96,44 +96,80 @@ exports.get_lesson = function (req, res){
 }
 
 exports.update_lesson = function (req, res){
-    Lesson.findOne({id:req.params.id}, {_id: 0})
-    .then(lessonToUpdate => {
-        if(!lessonToUpdate){
+    Lesson.findOne({_id:req.params.id}, {__v: 0})
+        .then(lesson => {
+            if(!lesson){
+                res.status(404);
+                return res.json({
+                    status: "404",
+                    message: "Lesson not found !",
+                    lesson: req.body
+                });
+            }
+            Lesson.updateOne({_id:req.params._id}, {$set: req.body}, (err, result) => {
+                if(err){
+                    res.status(400);
+                    return res.json({
+                        status: "400",
+                        message: "Could not update lesson ID: " + req.params.id,
+                        lessonSent: JSON.parse(req.body),
+                        lesson: lesson
+                    });
+                 }
+            })
+        })
+        .catch(err => {
+            res.status(500);
+            return res.json({
+                status: "500",
+                message: "Something wrong retrieving lesson with ID: " + req.params.id,
+            });
+        });
+}
+
+exports.update_user = function (req, res){
+    User.findOne({_id:req.params.id}, {__v: 0})
+        .then(userToUpdate => {
+            if(!userToUpdate){
+                res.status(404);
+                return res.json({
+                    status: "404",
+                    message: "User with id " + req.params.id + " not found.",
+                    userSent: JSON.parse(req.body)
+                });
+            }
+            User.updateOne({_id:req.params._id}, {$set: req.body}, (err, result) => {
+                if(err){
+                    res.status(400);
+                    return res.json({
+                        status: "400",
+                        message: "Could not update user ID: " + req.params.id,
+                        userSent: JSON.parse(req.body),
+                        userToUpdate: userToUpdate
+                    });
+                 }
+                 console.log(result);
+            })
+            .then(() => {
+                res.status(200);
+                 return res.json({
+                     status: "200",
+                     message: "User with id: " + req.params.id + " updated.",
+                     user: userToUpdate
+                 });
+            });
+        })
+        .catch(err => {
             res.status(404);
             return res.json({
                 status: "404",
-                message: "Lesson not found !",
-                lesson: req.body
+                message: "User not found with this ID: " + req.params.id
             });
-        }
-        Lesson.updateToOne(lessonToUpdate, req.body, function(err, result){
-            if(err){
-                res.status(400);
-                return res.json({
-                    status: "400",
-                    message: "Bad Request ! Could not update lesson "+ req.params.id,
-                    lesson: lessonToUpdate
-                })
-            }
-            res.status(200);
-            return res.json({
-                status: '200',
-                message: "Lesson "+req.params.id+" updated",
-                lesson: lessonToUpdate
-            })
-        })
-    })
-    .catch(err => {
-        res.status(500);
-        return res.json({
-            status: "500",
-            message: "Something wrong retrieving lesson with ID: " + req.params.id,
         });
-    });
 }
 
 exports.delete_lesson = function(req, res){
-    Lesson.findOne({id:req.params.id}, {_id: 0})
+    Lesson.findOne({_id:req.params.id}, {_id: 0})
         .then(lesson => {
             if(!lesson){
                 res.status(404);
@@ -142,7 +178,7 @@ exports.delete_lesson = function(req, res){
                     message: "Lesson with id " + req.params.id + " not found."
                 });
             }
-            lesson.deleteOne({id:req.params.id}, function(err, result){
+            Lesson.deleteOne({_id:req.params.id}, (err, result) => {
                 if(err){
                     res.status(400);
                     return res.json({

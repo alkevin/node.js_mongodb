@@ -4,10 +4,6 @@ var Schema = mongoose.Schema;
 // const Speaker = require('./speakerModel');
 
 let lessonSchema = new Schema({
-    id: {
-        type: Number,
-        required: [true, "cen't be blank"]
-    },
     name: {
         type: String,
         required: [true, "can't be blank"]
