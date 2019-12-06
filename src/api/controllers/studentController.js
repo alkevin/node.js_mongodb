@@ -169,7 +169,7 @@ exports.delete_all_students = function (req, res){
                 return res.json({
                     status: "404",
                     message: "Could not find users.",
-                    users: students
+                    students: students
                 });
             }
             else {

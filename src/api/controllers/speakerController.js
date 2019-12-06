@@ -213,3 +213,35 @@ exports.delete_speaker = function(req, res){
         });
 
 }
+
+exports.delete_all_speakers = function (req, res){
+    Speaker.find({})
+        .then( speakers => {
+            if(!speakers){
+                res.status(404);
+                return res.json({
+                    status: "404",
+                    message: "Could not find users.",
+                    speakers: speakers
+                });
+            }
+            else {
+                speakers.forEach(speaker => {
+                    Speaker.deleteOne({mail:speaker.mail});
+                });
+                res.status(200);
+                return res.json({
+                status: "200",
+                message: "All users deleted successfully.",
+                speakers
+            });
+            }
+        })
+        .catch(err => {
+            res.status(500);
+            return res.json({
+                status: "500",
+                message: "Something wrong fetched users."
+            });
+        });
+}
