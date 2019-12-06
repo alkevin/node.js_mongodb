@@ -5,6 +5,7 @@ const express = require('express'),
     app = express(),
     hostname = '0.0.0.0',
     User = require('./src/api/models/userModel');
+    Lesson = require('./src/api/models/lessonModel');
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
@@ -17,6 +18,7 @@ app.use(bodyParser.json());
 const swaggerSpec = require('./src/config/swagger.config').spec();  
 
 require('./src/api/routes/userRoutes.js')(app);
+require('./src/api/routes/lessonRoutes.js')(app);
 
 const swaggerOptions = {  
   customSiteTitle: 'Ipssi API 2019 Documentation', 
